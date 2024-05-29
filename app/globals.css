@@ -31,3 +31,16 @@ body {
     text-wrap: balance;
   }
 }
+
+.login-page {
+  display: flex;
+  justify-content: center;
+}
+
+.login-page > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 360px;
+}

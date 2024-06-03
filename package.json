@@ -4,8 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "yarn migrate && next dev",
-    "build": "yarn migrate && next build",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "migrate": "ts-node app/api/migrations.ts"

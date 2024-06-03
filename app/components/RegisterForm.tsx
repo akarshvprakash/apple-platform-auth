@@ -1,12 +1,14 @@
-// components/LoginForm.tsx
+// components/RegisterForm.tsx
 'use client';
+
 import { useState, FormEvent } from 'react';
 
-interface LoginFormProps {
+interface RegisterFormProps {
   onClose: () => void;
 }
 
-const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
+const RegisterForm: React.FC<RegisterFormProps> = ({ onClose }) => {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -15,12 +17,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     e.preventDefault();
     setError(null);
 
-    const res = await fetch('/api/login', {
+    const res = await fetch('/api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, email, password }),
     });
 
     if (res.ok) {
@@ -33,7 +35,21 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="text-2xl mb-4">Login</h2>
+      <h2 className="text-2xl mb-4">Register</h2>
+      {error && <p className="text-red-500 mb-4">{error}</p>}
+      <div className="mb-4">
+        <label className="block mb-2" htmlFor="name">
+          Name
+        </label>
+        <input
+          type="text"
+          id="name"
+          className="w-full p-2 border rounded"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+      </div>
       <div className="mb-4">
         <label className="block mb-2" htmlFor="email">
           Email
@@ -61,10 +77,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
         />
       </div>
       <button style={{width: "100%"}} type="submit" className="bg-blue-500 text-white p-2 rounded">
-        Login
+        Register
       </button>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

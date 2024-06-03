@@ -12,8 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       client.release();
 
       if (user && (password === user.password)) {
-        // Assuming we will use session or JWT for managing user sessions
-        res.status(200).json({ message: 'Login successful' });
+        res.status(200).json({ message: 'Login successful', user });
       } else {
         res.status(401).json({ error: 'Invalid email or password' });
       }

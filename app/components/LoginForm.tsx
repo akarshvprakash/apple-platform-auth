@@ -1,5 +1,6 @@
 'use client';
 import { useState, FormEvent } from 'react';
+import { createCredential } from '../lib/appleAuth';
 
 interface LoginFormProps {
   onClose: () => void;
@@ -24,6 +25,8 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
 
     if (res.ok) {
       onClose();
+      const { user } = await res.json();
+      createCredential(user);
     } else {
       const data = await res.json();
       setError(data.error || 'An error occurred');

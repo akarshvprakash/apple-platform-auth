@@ -1,4 +1,3 @@
-// components/LoginForm.tsx
 'use client';
 import { useState, FormEvent } from 'react';
 
@@ -15,7 +14,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onClose }) => {
     e.preventDefault();
     setError(null);
 
-    const res = await fetch('/api/login', {
+    const res = await fetch('/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

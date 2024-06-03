@@ -13,14 +13,17 @@
   "dependencies": {
     "@simplewebauthn/typescript-types": "^8.3.4",
     "next": "14.2.3",
+    "pg": "^8.11.5",
     "react": "^18",
     "react-dom": "^18",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
+    "string-width": "^7.1.0",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^20.14.0",
+    "@types/pg": "^8.11.6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",

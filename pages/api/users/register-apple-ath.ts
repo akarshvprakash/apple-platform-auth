@@ -9,8 +9,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { id, rawId, response, type } = credential_data;
 
     if (type !== 'public-key' || !id || !rawId || !response) {
-      console.log(type, id, rawId, response);
+      console.log(user_id, type, id, rawId, response, credential_data);
       return res.status(400).send('Invalid request');
+    } else {
+      console.log(user_id, type, id, rawId, response, credential_data);
     }
 
     const verificationOptions: any = {

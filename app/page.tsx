@@ -7,6 +7,10 @@ import RegisterForm from './components/RegisterForm';
 export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [showModalRegister, setShowModalRegister] = useState(false);
+
+  const openLoginPopup = () => {
+    
+  }
   
   return (
     <>

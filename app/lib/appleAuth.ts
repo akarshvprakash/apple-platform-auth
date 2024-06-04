@@ -3,7 +3,15 @@ import { AttestationConveyancePreference, AuthenticatorAttachment, PublicKeyCred
 const encoder = new TextEncoder();
 const decoder = new TextDecoder("utf-8");
 
-const saveCredential = async (credential: PublicKeyCredential, user: {    
+const saveCredential = async (credential: {
+  id: string;
+  rawId: string;
+  response: {
+      clientDataJSON: string;
+      attestationObject: string;
+  };
+  type: string;
+}, user: {    
     email: string
     id: number,
     name: string
@@ -45,7 +53,7 @@ export async function createCredential(user: {
     const challengeBuffer = encoder.encode("34914012789326781858713765455437");
     const options = {
         publicKey: {
-            rp: { name: "aloyoga.com" },
+            rp: { name: "apple-platform-auth.vercel.app" },
             user: {
                 name: user.email,
                 id: userIdBuffer,
@@ -73,6 +81,27 @@ export async function createCredential(user: {
         console.log("rawId", decoder.decode(publicKeyCredential.rawId));
         console.log("attestationObject", decoder.decode(attestationResponse.attestationObject));
         console.log("clientDataJSON", decoder.decode(attestationResponse.clientDataJSON));
-        saveCredential(publicKeyCredential, user)
+
+        // Prepare data to send to the server
+        const credentialData = {
+          id: publicKeyCredential.id,
+          rawId: arrayBufferToBase64(publicKeyCredential.rawId),
+          response: {
+            clientDataJSON: arrayBufferToBase64(publicKeyCredential.response.clientDataJSON),
+            attestationObject: arrayBufferToBase64((publicKeyCredential.response as AuthenticatorAttestationResponse).attestationObject),
+          },
+          type: publicKeyCredential.type,
+        };
+        saveCredential(credentialData, user)
     }
+  }
+
+  function arrayBufferToBase64(buffer: ArrayBuffer): string {
+    let binary = '';
+    const bytes = new Uint8Array(buffer);
+    const len = bytes.byteLength;
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i]);
+    }
+    return window.btoa(binary);
   }

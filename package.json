@@ -11,7 +11,9 @@
     "migrate": "ts-node app/api/migrations.ts"
   },
   "dependencies": {
+    "@simplewebauthn/server": "^10.0.0",
     "@simplewebauthn/typescript-types": "^8.3.4",
+    "base64url": "^3.0.1",
     "next": "14.2.3",
     "pg": "^8.11.5",
     "react": "^18",
@@ -22,6 +24,7 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@types/base64url": "^2.0.0",
     "@types/node": "^20.14.0",
     "@types/pg": "^8.11.6",
     "@types/react": "^18",

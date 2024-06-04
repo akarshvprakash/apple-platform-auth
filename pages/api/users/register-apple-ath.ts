@@ -6,7 +6,7 @@ import base64url from 'base64url';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'POST') {
     const { user_id, credential_data } = req.body;
-    const { id, rawId, response, type } = credential_data;
+    const { id, rawId, response, type } = JSON.parse(credential_data);
 
     if (type !== 'public-key' || !id || !rawId || !response) {
       console.log(user_id, type, id, rawId, response, credential_data);

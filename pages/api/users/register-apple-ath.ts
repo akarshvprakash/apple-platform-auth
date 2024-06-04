@@ -35,14 +35,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log("verificationResult.registrationInfo", verificationResult?.registrationInfo);
       if (verificationResult.verified && verificationResult.registrationInfo) {
         console.log("verificationResult.registrationInfo", verificationResult.registrationInfo);
-        const { credentialID, credentialPublicKey } = verificationResult.registrationInfo;
+        // const { credentialID, credentialPublicKey } = verificationResult.registrationInfo;
         const client = await pool.connect();
-        const query = 'INSERT INTO publickkey (user_id, credential_id, public_key) VALUES ($1, $2, $3) RETURNING *';
-        const values = [user_id, credentialID, credentialPublicKey];
-        await client.query(
-            query,
-            values
-        );
+        // const query = 'INSERT INTO publickkey (user_id, credential_id, public_key) VALUES ($1, $2, $3) RETURNING *';
+        // const values = [user_id, credentialID, credentialPublicKey];
+        // await client.query(
+        //     query,
+        //     values
+        // );
         client.release();
         res.status(201).json({ message: 'User biometric_credentials saved successfully' });
       }

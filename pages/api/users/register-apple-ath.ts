@@ -31,14 +31,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
 
-      const verificationResult : any = {} //: VerifiedRegistrationResponse = {};//await verifyRegistrationResponse(verificationOptions);
-      console.log("verificationResult.registrationInfo", user_id);
-      if (verificationResult?.verified && verificationResult?.registrationInfo) {
-        console.log("verificationResult.registrationInfo", verificationResult?.registrationInfo);
+      //const verificationResult : any = {} //: VerifiedRegistrationResponse = {};//await verifyRegistrationResponse(verificationOptions);
+      //if (verificationResult?.verified && verificationResult?.registrationInfo) {
+      if (id && response.attestationObject) {
         // const { credentialID, credentialPublicKey } = verificationResult.registrationInfo;
         const client = await pool.connect();
-        const query = 'INSERT INTO publickkey (user_id, credential_id, public_key) VALUES ($1, $2, $3) RETURNING *';
-        const values = [user_id, id, response.attestationObject];
+        const query = 'INSERT INTO publickkey (user_id, credential_id, public_key, raw_id) VALUES ($1, $2, $3, $4) RETURNING *';
+        const values = [user_id, id, response.attestationObject, rawId];
         await client.query(
             query,
             values

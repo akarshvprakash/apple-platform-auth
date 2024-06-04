@@ -49,6 +49,19 @@ export async function createCredential(user: {
     id: number,
     name: string
 }) {
+
+    const isAvailable = await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+
+    if(!isAvailable) {
+      alert("feature not available");
+      return;
+    } else {
+      if (confirm("Do you want to enable face id?")) {
+      } else {
+        return;
+      }
+    }
+
     let publicKeyCredential: PublicKeyCredential | null = null;
     const userIdBuffer = encoder.encode(user.id.toString());
     const challengeBuffer = encoder.encode("34914012789326781858713765455437");

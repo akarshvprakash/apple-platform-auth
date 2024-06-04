@@ -27,9 +27,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       expectedRPID: 'apple-platform-auth.vercel.app', // Replace with your domain
     };
 
+    console.log("verificationOptions", verificationOptions);
+
     try {
 
       const verificationResult: VerifiedRegistrationResponse = await verifyRegistrationResponse(verificationOptions);
+      console.log("verificationResult.registrationInfo", verificationResult?.registrationInfo);
       if (verificationResult.verified && verificationResult.registrationInfo) {
         console.log("verificationResult.registrationInfo", verificationResult.registrationInfo);
         const { credentialID, credentialPublicKey } = verificationResult.registrationInfo;

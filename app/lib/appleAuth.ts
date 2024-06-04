@@ -34,8 +34,9 @@ const saveCredential = async (credential: {
 
       if (!response.ok) {
         throw new Error('Failed to save credential');
+      } else {
+        localStorage.setItem("credentialId", credential.id);
       }
-
       // Optionally, handle the response from the backend
     } catch (error) {
       console.error('Error saving credential:', error);
